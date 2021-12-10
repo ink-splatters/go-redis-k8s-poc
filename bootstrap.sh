@@ -56,7 +56,7 @@ function info() {
 	echo -e
 }
 
-function run() {
+function runp() {
 	read -e -p "-- $* [press 'n' to skip]" -n 1 -r
 	REPLY=${REPLY:-Y}
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -67,6 +67,7 @@ function run() {
 	fi
 	echo
 }
+
 
 ####################################################################################################
 
@@ -79,13 +80,19 @@ info
 # shellcheck disable=SC2128
 
 if [[ $(uname) == "Darwin" ]]; then
-  run $pkg_mgr ${cmd[*]} ${tools[*]}
+  runp $pkg_mgr ${cmd[*]} ${tools[*]}
 fi
 
 
 ####################################################################################################
-script_dir=$(dirname "${BASH_SOURCE[0]}")
-cmd_create_cluster=(kind create cluster "--config=$script_dir/k8s/kind.yaml")
-activate_cluster=(kubectl cluster-info --context kind-kind)
-run ${cmd_create_cluster[*]}
-run ${activate_cluster[*]}
+
+script_dir=$(dirname "${BASH_SOURCE[0]}")/k8s
+namespace=go-redis-k8s-poc
+
+set -x
+kind create cluster "--config=$script_dir/kind.yaml"
+kubectl cluster-info --context kind-kind
+
+runp kubectl apply -f "$script_dir/$namespace.yaml"
+
+echo Bootstrap complete
