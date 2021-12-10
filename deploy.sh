@@ -2,6 +2,7 @@
 
 script_dir=$(dirname "${BASH_SOURCE[0]}")/k8s
 namespace=go-redis-k8s-poc
+redisver=6.2.6
 
 set -e
 set -x
@@ -10,6 +11,8 @@ set -x
 
 pushd $script_dir/redis || true
 
+docker pull redis:$redisver
+kind load docker-image redis:$redisver
 
 kubectl apply -f redis-namespace.yaml
 kubectl apply -f redis-config.yaml --namespace=redis

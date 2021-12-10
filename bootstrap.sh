@@ -83,6 +83,7 @@ if [[ $(uname) == "Darwin" ]]; then
   runp $pkg_mgr ${cmd[*]} ${tools[*]}
 fi
 
+run go install github.com/dahernan/godockerize@latest
 
 ####################################################################################################
 

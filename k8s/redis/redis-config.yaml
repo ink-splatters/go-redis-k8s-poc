@@ -5,7 +5,7 @@ metadata:
   name: redis-config
   namespace: redis
   labels:
-    app: redis
+    app: redis-626
 data:
   redis.conf: |-
     dir /data
