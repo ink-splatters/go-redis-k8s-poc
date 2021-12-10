@@ -12,4 +12,11 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
+
 # vendor/
+
+# jetbrains stuff
+.idea
+
+# mac metadata garbage
+.DS_Store
