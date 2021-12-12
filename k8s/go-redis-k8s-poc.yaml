@@ -1,6 +1,0 @@
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: go-redis-k8s-poc
-  labels:
-    name: go-redis-k8s-poc
