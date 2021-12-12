@@ -1,45 +1,20 @@
-//go:generate stringer -type=PhoneType -trimprefix=pt
 package model
 
-
-type PhoneType = int
-
-const (
-	ptHome PhoneType = iota
-	ptCell
-	ptWork
+import (
+	"github.com/ink-splatters/go-redis-k8s-poc/model/contacts"
+	"time"
 )
 
 type Person struct {
-	FirstName  string `redis:"person:first"`
-	SecondName string `redis:"person:second"`
-	Age        int8   `redis:"person:age"`
-	Sex        string `redis:"person:age"`
-
-	Address struct {
-		Country  string
-		City     string
-		Zip      int32
-		Street   string
-		HouseNum int32
-		Addition string
-	} `redis:"person:address"`
-
-	Phones []struct {
-		Type   PhoneType
-		Number string
-	} = {
-		struct{
-			Type:
-			}
+	Id   uint64 `redis:"person:id"` // TODO: check if needed
+	Name struct {
+		First  string `redis:"person:name:first"`
+		Second string `redis:"person:name:second"`
 	}
 
-	Extra [][]map
+	Age         int8      `redis:"person:age"`
+	Sex         string    `redis:"person:sex"`
+	DateOfBirth time.Time `redis:"person:date_of_birth"`
 
-}
-
-func NewPerson(firstName string, secondName string, Age string) *Person {
-	return &Person{
-		FirstName:,
-	}
+	Contacts contacts.Contacts
 }
