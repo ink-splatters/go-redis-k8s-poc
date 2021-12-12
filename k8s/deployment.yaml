@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: not-a-face-book
+  labels:
+    app: not-a-face-book
+spec:
+  replicas: 2
+  selector:
+  containers:
+    - name: not-a-face-book
+      image: "not-a-facebook:0.1"
+      ports:
+        - containerPort: 8080
