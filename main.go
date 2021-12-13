@@ -8,8 +8,13 @@ import (
 )
 
 var (
+	// Version (set via LDFLAGS)
 	Version = "<version>"
-	Build   = "<build>"
+
+	// Build (set via LDFLAGS)
+	Build = "<build>"
+
+	// AppName (set via LDFLAGS)
 	AppName = "<appname>"
 )
 

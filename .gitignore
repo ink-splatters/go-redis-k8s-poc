@@ -20,3 +20,6 @@ go-redis-k8c-poc
 
 # mac metadata garbage
 .DS_Store
+
+# generated files
+*_string.go

@@ -1,8 +1,11 @@
 package model
 
-//
-//import (
-//	"github.com/stretchr/testify"
-//)
-//
-//func Test
+
+import (
+	"testing"
+	_ "github.com/stretchr/testify"
+)
+
+func TestCreatePhone (t *testing.T) {
+	// TODO
+}

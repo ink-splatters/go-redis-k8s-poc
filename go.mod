@@ -3,16 +3,15 @@ module github.com/ink-splatters/go-redis-k8s-poc
 go 1.17
 
 require (
+	github.com/SuperPaintman/nice v0.0.0-20211001214957-a29cd3367b17
 	github.com/go-redis/redis/v8 v8.11.4
 	github.com/stretchr/testify v1.7.0
 )
 
 require (
-	github.com/SuperPaintman/nice v0.0.0-20211001214957-a29cd3367b17 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/magefile/mage v1.11.0 // indirect
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/objx v0.1.0 // indirect
