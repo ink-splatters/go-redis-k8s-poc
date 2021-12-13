@@ -12,7 +12,6 @@ LDFLAGS=-ldflags "-X=main.Version=$(VERSION) -X=main.Build=$(BUILD) -X=main.AppN
 
 # go source files, ignore vendor directory
 SRC := $(shell find . -type f -name '*.go')
-GENERATED := $(shell find . -type f -name '*_string.go')
 
 #.PHONY: all generate build clean install uninstall fmt simplify check run
 .PHONY: all gen build clean fmt pretty simplify check vet run
@@ -20,7 +19,6 @@ GENERATED := $(shell find . -type f -name '*_string.go')
 #all: check install
 all: check build
 
-$(GENERATED):
 	@go generate ./...
 
 $(TARGET): $(SRC) $(GENERATED)
