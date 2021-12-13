@@ -1,5 +1,5 @@
 SHELL := /usr/bin/env bash
-TARGET := go-redis-k8c-poc
+TARGET := go-redis-k8s-poc
 .DEFAULT_GOAL:  $(TARGET)
 
 # These will be provided to the target

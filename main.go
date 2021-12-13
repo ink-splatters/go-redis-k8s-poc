@@ -24,6 +24,7 @@ func main() {
 		Name:  AppName,
 		Usage: cli.Usage("PoC of ACID compliant REST CRUD (k8s, reddis for persistence)"),
 
+
 		Action: cli.ActionFunc(func(cmd *cli.Command) cli.ActionRunner {
 			name := cli.StringArg(cmd, "name",
 				cli.Usage("Who we say hello to"),
@@ -32,7 +33,7 @@ func main() {
 			*name = "Nice" // Default value.
 
 			return func(cmd *cli.Command) error {
-				//fmt.Println("Hello, %s!\n", *name)
+				fmt.Sprintf("%s (build %s)", Version, Build)
 				return nil
 			}
 		}),

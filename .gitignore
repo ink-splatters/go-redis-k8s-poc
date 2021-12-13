@@ -4,7 +4,7 @@
 *.dll
 *.so
 *.dylib
-go-redis-k8c-poc
+go-redis-k8s-poc
 # Test binary, built with `go test -c`
 *.test
 
