@@ -11,17 +11,17 @@ GOPATH := $(shell go env GOPATH)
 LDFLAGS=-ldflags "-X=main.Version=$(VERSION) -X=main.Build=$(BUILD) -X=main.AppName=$(TARGET)"
 
 # go source files, ignore vendor directory
-SRC := $(shell find . -type f -name '*.go')
 
-#.PHONY: all generate build clean install uninstall fmt simplify check run
-.PHONY: all gen build clean fmt pretty simplify check vet run
+SRC := $(shell find . -type f -name '*.go' -not -path "./vendor/*")
+
+#.PHONY: all build clean install uninstall fmt simplify check run
+.PHONY: all build clean fmt pretty simplify check vet run
 
 #all: check install
 all: check build
 
-	@go generate ./...
-
-$(TARGET): $(SRC) $(GENERATED)
+$(TARGET): $(SRC)
+	go generate ./...
 	@go build $(LDFLAGS) -o $(TARGET)
 
 bootstrap:
@@ -34,15 +34,17 @@ bootstrap:
 		go install golang.org/x/lint/golint@latest;\
 	fi
 
-gen: $(GENERATED)
-	@true
+check: bootstrap
+	@test -z $(shell gofmt -l main.go | tee /dev/stderr) || echo "[WARN] Fix formatting issues with 'make fmt'"
+	@for d in $$(go list ./... | grep -v /vendor/); do golint $${d}; done
+
 
 build: $(TARGET)
 	@true
 
 clean:
 	@rm -f $(TARGET)
-	@rm -f $(GENERATED)
+	@find . -type f -name '*_string.go' -exec rm -f {} \;
 
 #install:
 #	@go install $(LDFLAGS)
@@ -58,14 +60,10 @@ fmt:
 simplify:
 	@gofmt -s -l -w $(SRC)
 
-check:
-	@test -z $(shell gofmt -l main.go | tee /dev/stderr) || echo "[WARN] Fix formatting issues with 'make fmt'"
-	@for d in $$(go list ./... | grep -v /vendor/); do golint $${d}; done
 
 vet: $(TARGET)
-	@go vet .
-#	@go vet ./model/flags
-#	@go vet ./model
+	@go vet ./...
+
 
 run: build
 	@go run $(shell pwd)

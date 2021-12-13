@@ -2,7 +2,7 @@
 //go:generate stringer -type=PhoneType -trimprefix=pt
 package contacts
 
-type ContactFlags = uint8
+type ContactFlags uint8
 
 const (
 	cfNone ContactFlags = 1 << iota
@@ -12,7 +12,7 @@ const (
 	cfWork
 )
 
-type PhoneType = uint8
+type PhoneType uint8
 
 const (
 	ptLandLine PhoneType = iota
