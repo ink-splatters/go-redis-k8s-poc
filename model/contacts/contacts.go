@@ -1,5 +1,23 @@
+//go:generate stringer -type=ContactFlags -trimprefix=cf
+//go:generate stringer -type=PhoneType -trimprefix=pt
 package contacts
 
+type ContactFlags = uint8
+
+const (
+	cfNone ContactFlags = 1 << iota
+	cfPrimary
+	fSecondary
+	cfHome
+	cfWork
+)
+
+type PhoneType = uint8
+
+const (
+	ptLandLine PhoneType = iota
+	ptMobile
+)
 
 type Contact struct {
 	Address Address `redis:"contact:address"`
